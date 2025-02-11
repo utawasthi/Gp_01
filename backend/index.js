@@ -1,11 +1,18 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const authRoutes = require('./routes/authRoutes');
+
+const connectToDB = require('./DB/db');
+
+connectToDB();
+
+app.use(express.json());
+
+
+app.use('/api' , authRoutes);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`);
 });
